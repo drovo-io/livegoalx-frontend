@@ -88,3 +88,55 @@ body {
 .odds-container:has(> :nth-child(2):last-child) {
   grid-template-columns: repeat(2, 1fr);
 }
+
+/* src/App.css */
+
+/* ... keep all existing styles above ... */
+
+/* --- New Styles for Selection and Bet Slip --- */
+.odd-button.selected {
+  background-color: var(--odds-color);
+  border: 1px solid var(--odds-color);
+}
+
+.odd-button.selected span {
+  color: var(--background-color);
+  font-weight: 700;
+}
+
+.bet-slip-preview {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #3c424f;
+  padding: 15px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.bet-slip-preview p {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.bet-slip-preview p span:last-child {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--odds-color);
+}
+
+.place-bet-button {
+  background-color: var(--odds-color);
+  color: var(--background-color);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
