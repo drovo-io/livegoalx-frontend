@@ -52,13 +52,13 @@ export const leagues = [
   },
   {
     name: "Ligue 1",
-    logoUrl: "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
+    logoUrl: "https://images.fotmob.com/image_resources/logo/leaguelogo/54.png",
     matches: [ { id: 501, teamA: "PSG", teamB: "AS Monaco", markets: defaultMarkets } ],
     table: [ { pos: 1, team: "PSG", p: 12, w: 8, d: 3, l: 1, pts: 27 } ],
   },
   {
     name: "Saudi Pro League",
-    logoUrl: "https://images.fotmob.com/image_resources/logo/leaguelogo/249.png",
+    logoUrl: "https://images.fotmob.com/image_resources/logo/leaguelogo/652.png",
     matches: [ { id: 601, teamA: "Al-Nassr", teamB: "Al-Hilal", markets: defaultMarkets } ],
     table: [ { pos: 1, team: "Al-Hilal", p: 13, w: 11, d: 2, l: 0, pts: 35 } ],
   },
