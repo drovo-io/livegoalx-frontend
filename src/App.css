@@ -31,14 +31,20 @@ body { background-color: var(--background-color); color: var(--text-color); font
 .back-button { background: none; border: none; color: var(--text-color); font-size: 2.2rem; cursor: pointer; padding-right: 15px; }
 .header-league-logo { height: 28px; margin-right: 12px; }
 
-/* --- League Grid (NEW) --- */
-.league-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 10px; }
+/* --- League Grid (IMPROVED FOR RESPONSIVENESS) --- */
+.league-grid { 
+  display: grid;
+  /* CHANGE: This is the magic line. It fits as many columns of at least 100px as possible. */
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+  gap: 10px; 
+  padding: 0 10px; 
+}
 .league-grid-item { background-color: var(--card-color); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; aspect-ratio: 1 / 1; text-align: center; cursor: pointer; transition: all 0.2s; }
 .league-grid-item:hover { background-color: #3c424f; transform: translateY(-2px); }
 .league-grid-item.disabled { cursor: not-allowed; background-color: var(--card-color); opacity: 0.4; pointer-events: none; }
-.league-grid-logo { width: 60%; max-height: 50px; margin-bottom: 10px; object-fit: contain; }
-.logo-placeholder { height: 50px; margin-bottom: 10px; }
-.league-grid-name { font-size: 0.8rem; font-weight: 500; }
+.league-grid-logo { width: 50%; max-height: 45px; margin-bottom: 8px; object-fit: contain; } /* Adjusted size */
+.logo-placeholder { height: 45px; margin-bottom: 8px; } /* Adjusted size */
+.league-grid-name { font-size: 0.8rem; font-weight: 600; line-height: 1.2; } /* Adjusted size and line height */
 
 /* --- League Hub: Match List & Tabs --- */
 .match-list-item { background-color: var(--card-color); padding: 18px 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
