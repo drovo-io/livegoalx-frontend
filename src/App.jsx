@@ -3,28 +3,25 @@ import { useState } from 'react';
 import './App.css';
 import { leagues } from './mockData';
 
-// --- State Management ---
-// Three possible views: 'LEAGUES', 'MATCHES', 'MARKETS'
-// `context` stores the selected league or match
 function App() {
   const [view, setView] = useState('LEAGUES');
   const [context, setContext] = useState(null);
-  const [selection, setSelection] = useState(null); // For the chosen odd
+  const [selection, setSelection] = useState(null);
 
   const navigateTo = (newView, newContext) => {
     setContext(newContext);
     setView(newView);
-    setSelection(null); // Clear selection on navigation
+    setSelection(null);
   };
 
-  // --- Conditional Rendering based on View ---
   switch (view) {
-    case 'MATCHES':
-      return <MatchListView league={context} onMatchSelect={(match) => navigateTo('MARKETS', match)} onBack={() => navigateTo('LEAGUES')} />;
+    case 'LEAGUE_HUB':
+      return <LeagueHubView league={context} onMatchSelect={(match) => navigateTo('MARKETS', match)} onBack={() => navigateTo('LEAGUES')} />;
     case 'MARKETS':
-      return <MarketView match={context} selection={selection} setSelection={setSelection} onBack={() => navigateTo('MATCHES', leagues.find(l => l.name === context.leagueName))} />;
+      const currentLeague = leagues.find(l => l.name === context.leagueName);
+      return <MarketView match={context} selection={selection} setSelection={setSelection} onBack={() => navigateTo('LEAGUE_HUB', currentLeague)} />;
     default:
-      return <LeagueListView onLeagueSelect={(league) => navigateTo('MATCHES', league)} />;
+      return <LeagueListView onLeagueSelect={(league) => navigateTo('LEAGUE_HUB', league)} />;
   }
 }
 
@@ -34,7 +31,7 @@ const LeagueListView = ({ onLeagueSelect }) => (
   <div className="list-view">
     <header className="view-header"><h1>Leagues</h1></header>
     {leagues.map(league => (
-      <div key={league.name} className="list-item" onClick={() => league.matches.length > 0 && onLeagueSelect(league)}>
+      <div key={league.name} className={`list-item ${league.matches.length === 0 ? 'disabled' : ''}`} onClick={() => league.matches.length > 0 && onLeagueSelect(league)}>
         <span>{league.name}</span>
         {league.matches.length > 0 ? <span className="arrow">&rsaquo;</span> : <span className="empty-tag">Empty</span>}
       </div>
@@ -42,20 +39,27 @@ const LeagueListView = ({ onLeagueSelect }) => (
   </div>
 );
 
-const MatchListView = ({ league, onMatchSelect, onBack }) => (
+const LeagueHubView = ({ league, onMatchSelect, onBack }) => {
+  const [activeTab, setActiveTab] = useState('MATCHES');
+
+  return (
     <div className="list-view">
-        <header className="view-header">
-            <button onClick={onBack} className="back-button">&lsaquo;</button>
-            <h1>{league.name}</h1>
-        </header>
-        {league.matches.map(match => (
-            <div key={match.id} className="list-item" onClick={() => onMatchSelect({ ...match, leagueName: league.name })}>
-                <span>{match.teamA} vs {match.teamB}</span>
-                <span className="arrow">&rsaquo;</span>
-            </div>
-        ))}
+      <header className="view-header">
+        <button onClick={onBack} className="back-button">&lsaquo;</button>
+        {league.logoUrl && <img src={league.logoUrl} alt={`${league.name} logo`} className="league-logo" />}
+        <h1>{league.name}</h1>
+      </header>
+      <div className="tab-switcher">
+        <button onClick={() => setActiveTab('MATCHES')} className={activeTab === 'MATCHES' ? 'active' : ''}>Matches</button>
+        <button onClick={() => setActiveTab('TABLE')} className={activeTab === 'TABLE' ? 'active' : ''}>Table</button>
+      </div>
+      <div className="tab-content">
+        {activeTab === 'MATCHES' && <MatchListContent league={league} onMatchSelect={onMatchSelect} />}
+        {activeTab === 'TABLE' && <TableView table={league.table} />}
+      </div>
     </div>
-);
+  );
+};
 
 const MarketView = ({ match, selection, setSelection, onBack }) => {
   const handleOddSelect = (selectedOdd) => {
@@ -89,8 +93,40 @@ const MarketView = ({ match, selection, setSelection, onBack }) => {
   );
 };
 
+// --- Content Components for Tabs ---
 
-// --- Reusable UI Components (from previous step, unchanged) ---
+const MatchListContent = ({ league, onMatchSelect }) => (
+  <>
+    {league.matches.length > 0 ? league.matches.map(match => (
+      <div key={match.id} className="list-item" onClick={() => onMatchSelect({ ...match, leagueName: league.name })}>
+        <span>{match.teamA} vs {match.teamB}</span>
+        <span className="arrow">&rsaquo;</span>
+      </div>
+    )) : <p className="empty-message">No matches available right now.</p>}
+  </>
+);
+
+const TableView = ({ table }) => (
+    <div className="table-container">
+        {table.length > 0 ? (
+            <table className="league-table">
+                <thead>
+                    <tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>Pts</th></tr>
+                </thead>
+                <tbody>
+                    {table.map(row => (
+                        <tr key={row.pos}>
+                            <td>{row.pos}</td><td>{row.team}</td><td>{row.p}</td>
+                            <td>{row.w}</td><td>{row.d}</td><td>{row.l}</td><td><strong>{row.pts}</strong></td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        ) : <p className="empty-message">Table data is not available.</p>}
+    </div>
+);
+
+// --- Reusable UI Components ---
 
 const MarketGroup = ({ name, odds, selection, onOddSelect }) => (
   <div className="market-group">

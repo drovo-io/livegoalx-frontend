@@ -226,3 +226,97 @@ body {
   overflow-y: auto;
   padding: 10px;
 }
+
+
+/* src/App.css */
+/* ... keep all existing styles ... */
+
+.league-logo {
+  height: 28px;
+  margin-right: 12px;
+}
+
+.view-header h1 {
+  margin: 0 auto; /* Center title between button and potential logo space */
+}
+
+/* Tab Styles */
+.tab-switcher {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: var(--card-color);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.tab-switcher button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  color: var(--text-color);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.tab-switcher button.active {
+  background-color: #4a5160;
+}
+
+.empty-message {
+    text-align: center;
+    color: #8a92a2;
+    padding: 20px;
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+}
+
+.league-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.league-table th, .league-table td {
+  padding: 12px 8px;
+  text-align: left;
+}
+
+.league-table th {
+  color: #8a92a2;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.league-table td {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.league-table tr:last-child td {
+  border-bottom: none;
+}
+
+.league-table td:first-child, .league-table th:first-child {
+  text-align: center;
+}
+
+.league-table td:not(:first-child):not(:nth-child(2)) {
+  text-align: center;
+}
+
+.league-table strong {
+    color: var(--odds-color);
+}
+
+/* Add this class for leagues with no matches */
+.list-item.disabled {
+    cursor: not-allowed;
+    background-color: #272c35;
+    color: #7a8291;
+}
