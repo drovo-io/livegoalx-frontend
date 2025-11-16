@@ -31,7 +31,7 @@ export const leagues = [
   },
   {
     name: "La Liga",
-    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b8/LaLiga_Santander.svg",
+    logoUrl: "https://a.espncdn.com/i/leaguelogos/soccer/500/15.png",
     matches: [ { id: 201, teamA: "Real Madrid", teamB: "Barcelona", markets: defaultMarkets } ],
     table: [
         { pos: 1, team: "Girona", p: 13, w: 11, d: 1, l: 1, pts: 34 },
@@ -40,7 +40,7 @@ export const leagues = [
   },
     {
     name: "Serie A",
-    logoUrl: "https://upload.wikimedia.org/wikipedia/en/e/e1/Serie_A_logo_%282022%29.svg",
+    logoUrl: "https://images.fotmob.com/image_resources/logo/leaguelogo/55.png",
     matches: [ { id: 301, teamA: "Inter", teamB: "Juventus", markets: defaultMarkets } ],
     table: [ { pos: 1, team: "Inter", p: 12, w: 10, d: 1, l: 1, pts: 31 } ],
   },
@@ -52,13 +52,13 @@ export const leagues = [
   },
   {
     name: "Ligue 1",
-    logoUrl: "https://upload.wikimedia.org/wikipedia/commons/c/ca/Ligue1_Uber_Eats_logo.svg",
+    logoUrl: "https://a.espncdn.com/i/leaguelogos/soccer/500/12.png",
     matches: [ { id: 501, teamA: "PSG", teamB: "AS Monaco", markets: defaultMarkets } ],
     table: [ { pos: 1, team: "PSG", p: 12, w: 8, d: 3, l: 1, pts: 27 } ],
   },
   {
     name: "Saudi Pro League",
-    logoUrl: "https://upload.wikimedia.org/wikipedia/en/1/1b/RSL_Logo_2023-24.svg",
+    logoUrl: "https://images.fotmob.com/image_resources/logo/leaguelogo/249.png",
     matches: [ { id: 601, teamA: "Al-Nassr", teamB: "Al-Hilal", markets: defaultMarkets } ],
     table: [ { pos: 1, team: "Al-Hilal", p: 13, w: 11, d: 2, l: 0, pts: 35 } ],
   },
