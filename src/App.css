@@ -140,3 +140,89 @@ body {
   font-weight: 700;
   cursor: pointer;
 }
+
+/* src/App.css */
+/* ... keep all existing styles ... */
+
+/* --- New Navigation and List View Styles --- */
+.list-view {
+  padding: 10px;
+}
+
+.view-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  color: var(--text-color);
+  padding: 0 5px;
+}
+
+.view-header h1 {
+  font-size: 1.4rem;
+  margin: 0;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 2.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 15px 0 0;
+  line-height: 1;
+}
+
+.list-item {
+  background-color: var(--card-color);
+  padding: 18px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.list-item:hover {
+  background-color: #3c424f;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #7a8291;
+}
+
+.empty-tag {
+    font-size: 0.8rem;
+    color: #7a8291;
+    background-color: #444a57;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+/* --- Styles for Market View Layout --- */
+.market-view-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.fixed-header {
+  position: sticky;
+  top: 0;
+  background-color: var(--background-color);
+  z-index: 10;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.market-scroll-area {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
