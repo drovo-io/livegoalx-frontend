@@ -3,26 +3,93 @@ import { useState } from 'react';
 import './App.css';
 import { leagues } from './mockData';
 
-function App() {
-  const [view, setView] = useState('LEAGUES');
-  const [context, setContext] = useState(null);
-  const [selection, setSelection] = useState(null);
+// --- Icon Components (Simple SVGs) ---
+const ProfileIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>;
+const SportsIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15-3.5-3.5 1.41-1.41L11 13.17l4.59-4.59L17 10l-6 6z" /></svg>;
+const WalletIcon = () => <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>;
 
-  const navigateTo = (newView, newContext) => {
-    setContext(newContext);
-    setView(newView);
-    setSelection(null);
+// --- Main App Layout ---
+const Layout = ({ activePage, setActivePage, children }) => (
+  <div className="main-layout">
+    <header className="app-header">
+      <button className="header-btn profile-btn" onClick={() => setActivePage('PROFILE')}><ProfileIcon /></button>
+      <div className="balance-display">
+        <span className="currency-icon">🪙</span>
+        <span>1,000.00</span>
+      </div>
+      <div className="logo">LiveGoalX</div>
+    </header>
+    <main className="content-area">
+      {children}
+    </main>
+    <footer className="app-footer">
+      <nav className="bottom-nav">
+        <button className={activePage === 'SPORTS' ? 'active' : ''} onClick={() => setActivePage('SPORTS')}>
+          <SportsIcon />
+          <span>Sports</span>
+        </button>
+        <button className={activePage === 'WALLET' ? 'active' : ''} onClick={() => setActivePage('WALLET')}>
+          <WalletIcon />
+          <span>Wallet</span>
+        </button>
+      </nav>
+    </footer>
+  </div>
+);
+
+// --- Page Components ---
+const SportsPage = () => {
+    // This is our previous App logic, now self-contained in a component
+    const [view, setView] = useState('LEAGUES');
+    const [context, setContext] = useState(null);
+    const [selection, setSelection] = useState(null);
+
+    const navigateTo = (newView, newContext) => {
+        setContext(newContext);
+        setView(newView);
+        setSelection(null);
+    };
+
+    switch (view) {
+        case 'LEAGUE_HUB':
+            return <LeagueHubView league={context} onMatchSelect={(match) => navigateTo('MARKETS', match)} onBack={() => navigateTo('LEAGUES')} />;
+        case 'MARKETS':
+            const currentLeague = leagues.find(l => l.name === context.leagueName);
+            return <MarketView match={context} selection={selection} setSelection={setSelection} onBack={() => navigateTo('LEAGUE_HUB', currentLeague)} />;
+        default:
+            return <LeagueListView onLeagueSelect={(league) => navigateTo('LEAGUE_HUB', league)} />;
+    }
+};
+
+const PlaceholderPage = ({ title }) => (
+    <div className="placeholder-page">
+        <h1>{title}</h1>
+        <p>This page is under construction.</p>
+    </div>
+);
+
+// --- Main Controller ---
+function App() {
+  const [activePage, setActivePage] = useState('SPORTS');
+
+  const renderPage = () => {
+    switch (activePage) {
+      case 'SPORTS':
+        return <SportsPage />;
+      case 'WALLET':
+        return <PlaceholderPage title="Wallet" />;
+      case 'PROFILE':
+        return <PlaceholderPage title="Profile (Wins/Losses)" />;
+      default:
+        return <SportsPage />;
+    }
   };
 
-  switch (view) {
-    case 'LEAGUE_HUB':
-      return <LeagueHubView league={context} onMatchSelect={(match) => navigateTo('MARKETS', match)} onBack={() => navigateTo('LEAGUES')} />;
-    case 'MARKETS':
-      const currentLeague = leagues.find(l => l.name === context.leagueName);
-      return <MarketView match={context} selection={selection} setSelection={setSelection} onBack={() => navigateTo('LEAGUE_HUB', currentLeague)} />;
-    default:
-      return <LeagueListView onLeagueSelect={(league) => navigateTo('LEAGUE_HUB', league)} />;
-  }
+  return (
+    <Layout activePage={activePage} setActivePage={setActivePage}>
+      {renderPage()}
+    </Layout>
+  );
 }
 
 // --- View Components ---
