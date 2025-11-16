@@ -1,296 +1,77 @@
 /* src/App.css */
-
-/* --- Theme Variables --- */
 :root {
-  --background-color: #1a1d22;
-  --card-color: #272c35;
-  --header-footer-color: #20242a;
-  --text-color: #f0f0f0;
-  --text-muted-color: #8a92a2;
-  --primary-accent-color: #5d9cec; /* A vibrant blue for selections */
-  --odds-color: #e5c07b;
-  --border-color: #3a414e;
+  --background-color: #1a1d22; --card-color: #272c35; --header-footer-color: #20242a;
+  --text-color: #f0f0f0; --text-muted-color: #8a92a2; --primary-accent-color: #5d9cec;
+  --odds-color: #e5c07b; --border-color: #3a414e;
 }
-
-/* --- Base & Reset --- */
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  margin: 0;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-}
+body { background-color: var(--background-color); color: var(--text-color); font-family: -apple-system, sans-serif; margin: 0; }
+* { box-sizing: border-box; }
 
 /* --- Main Layout --- */
-.main-layout {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-}
+.main-layout { display: flex; flex-direction: column; min-height: 100vh; max-width: 600px; margin: 0 auto; }
+.content-area { flex-grow: 1; padding: 60px 0 70px 0; }
+.app-header { position: fixed; top: 0; left: 0; right: 0; width: 100%; max-width: 600px; margin: 0 auto; z-index: 100; background-color: var(--header-footer-color); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; height: 60px; }
+.app-footer { position: fixed; bottom: 0; left: 0; right: 0; width: 100%; max-width: 600px; margin: 0 auto; z-index: 100; background-color: var(--header-footer-color); border-top: 1px solid var(--border-color); height: 70px; }
 
-.content-area {
-  flex-grow: 1;
-  padding: 60px 0 70px 0;
-}
-
-/* --- App Header --- */
-.app-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  z-index: 100;
-  background-color: var(--header-footer-color);
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
-  height: 60px;
-}
-
-.header-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted-color);
-  cursor: pointer;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-}
+/* --- Header & Footer Elements --- */
+.header-btn { background: none; border: none; color: var(--text-muted-color); cursor: pointer; padding: 5px; display: flex; }
 .header-btn svg { width: 28px; height: 28px; }
-
-.balance-display {
-  display: flex;
-  align-items: center;
-  background-color: var(--card-color);
-  padding: 6px 12px;
-  border-radius: 18px;
-  font-weight: 600;
-}
+.balance-display { display: flex; align-items: center; background-color: var(--card-color); padding: 6px 12px; border-radius: 18px; font-weight: 600; }
 .currency-icon { margin-right: 8px; font-size: 1.2rem; }
 .logo { font-size: 1.2rem; font-weight: bold; }
-
-/* --- App Footer & Bottom Navigation --- */
-.app-footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  z-index: 100;
-  background-color: var(--header-footer-color);
-  border-top: 1px solid var(--border-color);
-  height: 70px;
-}
-
-.bottom-nav {
-  display: flex;
-  height: 100%;
-}
-.bottom-nav button {
-  flex: 1;
-  background: none;
-  border: none;
-  color: var(--text-muted-color);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-.bottom-nav button.active {
-  color: var(--primary-accent-color);
-}
+.bottom-nav { display: flex; height: 100%; }
+.bottom-nav button { flex: 1; background: none; border: none; color: var(--text-muted-color); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 0.75rem; cursor: pointer; transition: color 0.2s; }
+.bottom-nav button.active { color: var(--primary-accent-color); }
 .bottom-nav svg { width: 24px; height: 24px; }
 
-/* --- Sports Page Specific Components --- */
-.list-view, .market-scroll-area {
-  padding: 10px;
-}
+/* --- View Headers & Back Buttons --- */
+.list-view { padding: 10px; }
+.view-header { display: flex; align-items: center; margin-bottom: 15px; padding: 0 5px; }
+.view-header h1 { font-size: 1.4rem; margin: 0 auto; }
+.back-button { background: none; border: none; color: var(--text-color); font-size: 2.2rem; cursor: pointer; padding-right: 15px; }
+.header-league-logo { height: 28px; margin-right: 12px; }
 
-.view-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  color: var(--text-color);
-  padding: 0 5px;
-}
+/* --- League Grid (NEW) --- */
+.league-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 10px; }
+.league-grid-item { background-color: var(--card-color); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; aspect-ratio: 1 / 1; text-align: center; cursor: pointer; transition: all 0.2s; }
+.league-grid-item:hover { background-color: #3c424f; transform: translateY(-2px); }
+.league-grid-item.disabled { cursor: not-allowed; background-color: var(--card-color); opacity: 0.4; pointer-events: none; }
+.league-grid-logo { width: 60%; max-height: 50px; margin-bottom: 10px; object-fit: contain; }
+.logo-placeholder { height: 50px; margin-bottom: 10px; }
+.league-grid-name { font-size: 0.8rem; font-weight: 500; }
 
-.view-header h1 {
-  font-size: 1.4rem;
-  margin: 0;
-  flex-grow: 1;
-  text-align: center;
-}
-
-.back-button {
-  background: none;
-  border: none;
-  color: var(--text-color);
-  font-size: 2.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0 15px 0 0;
-  line-height: 1;
-}
-
-.list-item {
-  background-color: var(--card-color);
-  padding: 18px 15px;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.list-item:hover { background-color: #3c424f; }
-.list-item.disabled {
-    cursor: not-allowed;
-    background-color: #272c35;
-    color: var(--text-muted-color);
-}
-
+/* --- League Hub: Match List & Tabs --- */
+.match-list-item { background-color: var(--card-color); padding: 18px 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
 .arrow { font-size: 1.5rem; color: #7a8291; }
-.empty-tag {
-    font-size: 0.8rem;
-    color: #7a8291;
-    background-color: #444a57;
-    padding: 3px 8px;
-    border-radius: 5px;
-}
-.league-logo { height: 28px; margin-right: 12px; }
-
-/* Tabs */
-.tab-switcher {
-  display: flex;
-  margin-bottom: 20px;
-  background-color: var(--card-color);
-  border-radius: 8px;
-  padding: 4px;
-}
-.tab-switcher button {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  background-color: transparent;
-  color: var(--text-color);
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: background-color 0.2s;
-}
+.tab-switcher { display: flex; margin-bottom: 20px; background-color: var(--card-color); border-radius: 8px; padding: 4px; }
+.tab-switcher button { flex: 1; padding: 10px; border: none; background: transparent; color: var(--text-color); font-size: 0.9rem; font-weight: 600; cursor: pointer; border-radius: 6px; }
 .tab-switcher button.active { background-color: #4a5160; }
-
 .empty-message { text-align: center; color: var(--text-muted-color); padding: 20px; }
 
-/* Table */
-.league-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9rem;
-}
+/* --- League Table --- */
+.league-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 .league-table th, .league-table td { padding: 12px 8px; text-align: left; }
-.league-table th { color: var(--text-muted-color); font-weight: 500; border-bottom: 1px solid var(--border-color); }
+.league-table th { color: var(--text-muted-color); border-bottom: 1px solid var(--border-color); }
 .league-table td { border-bottom: 1px solid var(--border-color); }
-.league-table tr:last-child td { border-bottom: none; }
-.league-table td:first-child, .league-table th:first-child { text-align: center; }
-.league-table td:not(:first-child):not(:nth-child(2)) { text-align: center; }
+.league-table tr:last-child td { border: none; }
 .league-table strong { color: var(--odds-color); }
 
-/* Markets & Odds */
+/* --- Markets & Odds --- */
+.market-view-container { display: flex; flex-direction: column; height: 100%; }
+.fixed-header { position: sticky; top: 60px; background-color: var(--background-color); z-index: 10; padding: 10px 0; }
+.market-scroll-area { padding: 0 10px 10px 10px; }
 .market-group { background-color: var(--card-color); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
-.market-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 12px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border-bottom: 1px solid var(--border-color);
-  margin: 0;
-}
-.odds-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 1px;
-  background-color: var(--border-color);
-}
-.odd-button {
-  background-color: var(--card-color);
-  padding: 14px 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
-  border: 1px solid transparent;
-}
+.market-title { font-size: 0.9rem; font-weight: 600; padding: 12px; background-color: rgba(0,0,0,0.1); border-bottom: 1px solid var(--border-color); margin: 0; }
+.odds-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 1px; background-color: var(--border-color); }
+.odd-button { background-color: var(--card-color); padding: 14px 10px; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; cursor: pointer; }
 .odd-button:hover { background-color: #3c424f; }
-.odd-button span:first-child { color: var(--text-color); opacity: 0.8; }
 .odd-button span:last-child { font-weight: 700; color: var(--odds-color); }
-.odd-button.selected { background-color: var(--primary-accent-color); border-color: var(--primary-accent-color); }
-.odd-button.selected span { color: var(--background-color) !important; opacity: 1; }
+.odd-button.selected { background-color: var(--primary-accent-color); }
+.odd-button.selected span { color: var(--background-color) !important; }
 
-/* Bet Slip */
-.bet-slip-preview {
-  position: fixed;
-  bottom: 70px; /* Above the main footer */
-  left: 0;
-  right: 0;
-  max-width: 600px;
-  margin: 0 auto;
-  background-color: #3c424f;
-  padding: 15px;
-  border-top: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2);
-}
+/* --- Bet Slip --- */
+.bet-slip-preview { position: fixed; bottom: 70px; left: 0; right: 0; max-width: 600px; margin: 0 auto; background-color: #3c424f; padding: 15px; border-top: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 -4px 15px rgba(0,0,0,0.2); }
 .bet-slip-preview p { margin: 0; display: flex; flex-direction: column; }
 .bet-slip-preview p span:last-child { font-size: 1.1rem; font-weight: 700; color: var(--odds-color); }
-
-.place-bet-button {
-  background-color: var(--primary-accent-color);
-  color: var(--background-color);
-  border: none;
-  border-radius: 8px;
-  padding: 12px 24px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-/* Placeholder Page */
-.placeholder-page {
-    padding: 20px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-}
+.place-bet-button { background-color: var(--primary-accent-color); color: var(--background-color); border: none; border-radius: 8px; padding: 12px 24px; font-size: 1rem; font-weight: 700; cursor: pointer; }
+.placeholder-page { padding: 20px; text-align: center; }
